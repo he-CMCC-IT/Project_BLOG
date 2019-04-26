@@ -1,0 +1,209 @@
+{% extends 'ziyangroup/base.html' %}
+{% load blog_tags %}
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+
+    <!-- Start Page Header area -->
+    <div id="mu-page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mu-page-header-area">
+                        <h1 class="mu-page-header-title">Blog Details</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Header area -->
+
+    <!-- Start Breadcrumb -->
+    <div id="mu-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb mu-breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Blog Details</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb -->
+
+
+    <!-- Start main content -->
+    <main>
+        <!-- Start Blog -->
+        <section id="mu-blog" class="mu-blog-single">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mu-blog-area">
+                            <!-- Title -->
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="mu-blog-left">
+                                        <!-- start single item -->
+                                        <article class="mu-blog-item">
+                                            <h1 class="mu-blog-item-title">{{ post.title }}</h1>
+                                            <div class="mu-blog-item-content">
+                                                <ul class="mu-blog-tag-nav">
+                                                    <li><h3><span class="fa fa-tag"></span>Article Tags:</h3></li>
+                                                    {% for tag in post.tags.all %}
+                                                        <li>
+                                                            <a href="{% url "blog:post_list_by_tag" tag.slug %}">{{ tag.name }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                                <ul class="mu-blog-meta">
+                                                    <li>发布于：{{ post.publish }}</li>
+                                                    <li>作者：{{ post.author }}</li>
+                                                    <li><i class="fa fa-comment-o"></i>{{ post.comments.count }}</li>
+                                                    <li><i class="fa fa-heart-o"></i>{{ post.explored }}</li>
+                                                </ul>
+                                                {{ post.body|safe }}
+                                            </div>
+
+                                            <!-- Start related post -->
+                                            <div class="mu-related-post">
+                                                <h2 class="mu-related-post-title">您可能还会喜欢</h2>
+                                                <div class="row">
+
+                                                        {% for post in similar_posts %}
+<div class="col-md-4">
+                                                            <article class="mu-blog-item">
+                                                                <h1 class="mu-blog-item-title">
+                                                                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                                                </h1>
+                                                                <div class="mu-blog-item-content">
+                                                                    <p class="tags">
+                                                                        Tags:
+                                                                        {% for tag in post.tags.all %}
+                                                                            <a href="{% url "blog:post_list_by_tag" tag.slug %}">{{ tag.name }}</a>
+                                                                            {% if not forloop.last %}, {% endif %}
+                                                                        {% endfor %}
+                                                                    </p>
+                                                                    <ul class="mu-blog-meta">
+                                                                        <li>发布于：{{ post.publish }}</li>
+                                                                        <li>作者：{{ post.author }}</li>
+                                                                        <li>
+                                                                            <i class="fa fa-comment-o"></i>{{ post.comments.count }}
+                                                                        </li>
+                                                                        <li><i class="fa fa-heart-o"></i>{{ post.explored }}</li>
+                                                                    </ul>
+                                                                    <p>{{ post.body|safe|truncatewords_html:5 }}</p>
+                                                                    <a class="mu-blg-readmore-btn"
+                                                                       href="{{ post.get_absolute_url }}">Read
+                                                                        more
+                                                                        <i class="fa fa-long-arrow-right"></i></a>
+                                                                </div>
+                                                            </article>
+</div>
+                                                        {% empty %}
+                                                            <div class="col-md-12">暂时没有类似的文章</div>
+                                                        {% endfor %}
+
+                                                </div>
+                                            </div>
+                                            <!-- End related post -->
+
+                                            <!-- start blog comment -->
+
+
+                                            <div class="mu-comments-area">
+
+                                                    <h2>
+                                                        共有{{ total_comments.count }}条评论
+                                                    </h2>
+
+
+                                                <div class="comments">
+                                                    <ul class="commentlist">
+                                                        {% for comment in comments %}
+                                                            <li>
+                                                                <div class="media">
+                                                                    <div class="media-body">
+                                                                    <p class="info">
+                                                                        Comment {{ forloop.counter|add:page_offset }}
+                                                                        by {{ comment.name }}
+                                                                        {{ comment.created }}
+                                                                    </p>
+                                                                    {{ comment.body|linebreaks }}
+                                                                    </div>
+                                                                </div>
+
+                                                            </li>
+
+                                                        {% empty %}
+                                                            <p>暂无评论</p>
+                                                        {% endfor %}
+                                                    </ul>
+                                                    <!-- comments pagination -->
+                                                    {% include 'blog/pagination.html' with page=comments %}
+                                                </div>
+                                            </div>
+
+
+                                            <!-- end blog comment -->
+
+                                            <!-- start respond form -->
+                                            <div id="respond">
+
+                                                {% if new_comment %}
+                                                    <h2>Your comment has been added.</h2>
+                                                {% else %}
+                                                    <h2 class="reply-title">Leave a reply</h2>
+                                                    <form action="." method="post">
+                                                        <p class="comment-form-author">
+                                                            <label for="author">Name <span
+                                                                    class="required">*</span></label>
+                                                            <input type="text" required="required" name="name">
+                                                        </p>
+                                                        <p class="comment-form-email">
+                                                            <label for="email">Email <span
+                                                                    class="required">*</span></label>
+                                                            <input type="email" required="required" aria-required="true"
+                                                                   name="email">
+                                                        </p>
+                                                        <p class="comment-form-comment">
+                                                            <label for="comment">Comment</label>
+                                                            <textarea required="required" aria-required="true" rows="8"
+                                                                      cols="45" name="body"></textarea>
+                                                        </p>
+                                                        {% csrf_token %}
+                                                        <p class="form-submit">
+                                                            <input type="submit" value="Add comment"
+                                                                   class="mu-send-msg-btn"
+                                                                   name="submit">
+                                                        </p>
+                                                    </form>
+                                                {% endif %}
+                                            </div>
+                                            <!-- end respond form -->
+
+                                        </article>
+                                        <!-- End single item -->
+                                    </div>
+                                </div>
+
+                                {% include 'blog/right-side-bar.html' %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Blog -->
+
+    </main>
+
+    <!-- End main content -->
+{% endblock %}

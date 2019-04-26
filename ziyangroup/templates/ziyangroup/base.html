@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/icon" href="{% static 'ziyangroup/assets/images/favicon.ico' %}"/>
+    <!-- Font Awesome -->
+    <link href="{% static 'ziyangroup/from_internet/css/font-awesome.min.css' %}" rel="stylesheet">
+     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'ziyangroup/from_internet/css/bootstrap.min.css' %}" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <!-- Slick slider -->
+    <link href="{% static 'ziyangroup/assets/css/slick.css' %}" rel="stylesheet">
+    <!-- Gallery Lightbox -->
+    <link href="{% static 'ziyangroup/assets/css/magnific-popup.css' %}" rel="stylesheet">
+    <!-- Skills Circle CSS  -->
+    <link rel="stylesheet" type="text/css" href="{% static 'ziyangroup/assets/css/circle.css' %}">
+
+
+    <!-- Main Style -->
+    <link href="{% static 'ziyangroup/style.css' %}" rel="stylesheet">
+
+    <!-- Fonts -->
+
+    <!-- Google Fonts Raleway -->
+	<link href="{% static 'ziyangroup/from_internet/css/css-1' %}" rel="stylesheet">
+	<!-- Google Fonts Open sans -->
+	<link href="{% static 'ziyangroup/from_internet/css/css-2' %}" rel="stylesheet">
+
+
+	</head>
+  <body>
+
+   <!--START SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#">
+      <i class="fa fa-angle-up"></i>
+    </a>
+  <!-- END SCROLL TOP BUTTON -->
+
+  	<!-- Start Header -->
+	<header id="mu-hero">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-light mu-navbar">
+				<!-- Text based logo -->
+				<a class="navbar-brand mu-logo" href="{% url 'ziyangroup:index' %}"><span>B-HERO</span></a>
+				<!-- image based logo -->
+			   	<!-- <a class="navbar-brand mu-logo" href="index.html"><img src="assets/images/logo.png" alt="logo"></a> -->
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="fa fa-bars"></span>
+			  </button>
+
+			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			    <ul class="navbar-nav mr-auto mu-navbar-nav">
+			      <li class="nav-item {% if request.path == "/ziyangroup/index/" %}active{% endif %}">
+			          <a href="{% url 'ziyangroup:index' %}">Home</a></li>
+			      <li class="nav-item {% if request.path == "/ziyangroup/about_us/" %}active{% endif %}" >
+                      <a href="{% url 'ziyangroup:about_us' %}">About us</a></li>
+			      <li class="nav-item {% if request.path == "/ziyangroup/services/" %}active{% endif %}">
+                      <a href="{% url 'ziyangroup:services' %}">Services</a></li>
+			      <li class="nav-item {% if request.path == "/ziyangroup/portfolio/" %}active{% endif %}">
+                      <a href="{% url 'ziyangroup:portfolio' %}">Portfolio</a></li>
+			      <li class="nav-item {% if request.path|slice:"6" == "/blog/" %}active{% endif %}">
+                      <a href="{% url 'blog:post_list' %}">Blog</a></li>
+                  <li class="nav-item {% if request.path == "/ziyangroup/contact/" %}active{% endif %}">
+                      <a href="{% url 'ziyangroup:contact' %}">Contact us</a></li>
+			    </ul>
+			  </div>
+			</nav>
+		</div>
+	</header>
+	<!-- End Header -->
+
+   {% block content %}{% endblock %}
+
+	<!-- Start footer -->
+	<footer id="mu-footer">
+		<div class="mu-footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="mu-single-footer">
+							<img class="mu-footer-logo" src="{% static 'ziyangroup/assets/images/logo.png' %}" alt="logo">
+							<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus. </p>
+							<div class="mu-social-media">
+								<a href="#"><i class="fa fa-facebook"></i></a>
+								<a class="mu-twitter" href="#"><i class="fa fa-twitter"></i></a>
+								<a class="mu-pinterest" href="#"><i class="fa fa-pinterest-p"></i></a>
+								<a class="mu-google-plus" href="#"><i class="fa fa-google-plus"></i></a>
+								<a class="mu-youtube" href="#"><i class="fa fa-youtube"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="mu-single-footer">
+							<h3>Twitter feed</h3>
+							<ul class="list-unstyled">
+							  	<li class="media">
+								   <span class="fa fa-twitter"></span>
+								    <div class="media-body">
+								    	<p><strong>@b_hero</strong> Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+								    	<a href="#">2 hours ago</a>
+								    </div>
+							  	</li>
+							  	<li class="media">
+								   	<span class="fa fa-twitter"></span>
+								    <div class="media-body">
+								    	<p><strong>@b_hero</strong> Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+								    	<a href="#">2 hours ago</a>
+								    </div>
+							  	</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="mu-single-footer">
+							<h3>Useful link</h3>
+							<ul class="mu-useful-links">
+								<li><a href="#">Help Center</a></li>
+								<li><a href="#">Download Center</a></li>
+								<li><a href="#">User Account</a></li>
+								<li><a href="#">Support Forum</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="mu-single-footer">
+							<h3>Contact Information</h3>
+							<ul class="list-unstyled">
+							  <li class="media">
+							    <span class="fa fa-home"></span>
+							    <div class="media-body">
+							    	<p>349 Main St, Deseronto, ON K0K 1X0, Canada</p>
+							    </div>
+							  </li>
+							  <li class="media">
+							    <span class="fa fa-phone"></span>
+							    <div class="media-body">
+							       <p>+00 123 456 789 00</p>
+							     	<p>+ 00 254 632 548 00</p>
+							    </div>
+							  </li>
+							  <li class="media">
+							    <span class="fa fa-envelope"></span>
+							    <div class="media-body">
+							     <p>support@bhero.com</p>
+							     <p>help.behero@gmail.com</p>
+							    </div>
+							  </li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mu-footer-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="mu-footer-bottom-area">
+							<p class="mu-copy-right">&copy; Copyright markups.io. All right reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</footer>
+	<!-- End footer -->
+
+
+	<!-- JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'ziyangroup/from_internet/js/jquery.min.js' %}"></script>
+    <script src="{% static 'ziyangroup/from_internet/js/popper.min.js' %}" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="{% static 'ziyangroup/from_internet/js/bootstrap.min.js' %}" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+	<!-- Slick slider -->
+    <script type="text/javascript" src="{% static 'ziyangroup/assets/js/slick.min.js' %}"></script>
+    <!-- Progress Bar -->
+    <script src="{% static 'ziyangroup/from_internet/js/circle.js' %}"></script>
+    <!-- Filterable Gallery js -->
+    <script type="text/javascript" src="{% static 'ziyangroup/assets/js/jquery.filterizr.min.js' %}"></script>
+    <!-- Gallery Lightbox -->
+    <script type="text/javascript" src="{% static 'ziyangroup/assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <!-- Counter js -->
+    <script type="text/javascript" src="{% static 'ziyangroup/assets/js/counter.js' %}"></script>
+    <!-- Ajax contact form  -->
+    <script type="text/javascript" src="{% static 'ziyangroup/assets/js/app.js' %}"></script>
+
+
+    <!-- Custom js -->
+	<script type="text/javascript" src="{% static 'ziyangroup/assets/js/custom.js' %}"></script>
+
+	<!-- About us Skills Circle progress  -->
+	<script>
+		// First circle
+	    new Circlebar({
+        element : "#circle-1",
+        type : "progress",
+	      maxValue:  "90"
+	    });
+
+		// Second circle
+	    new Circlebar({
+        element : "#circle-2",
+        type : "progress",
+	      maxValue:  "84"
+	    });
+
+	    // Third circle
+	    new Circlebar({
+        element : "#circle-3",
+        type : "progress",
+	      maxValue:  "60"
+	    });
+
+	    // Fourth circle
+	    new Circlebar({
+        element : "#circle-4",
+        type : "progress",
+	      maxValue:  "74"
+	    });
+
+	</script>
+
+  </body>
+</html>

@@ -1,0 +1,39 @@
+{% load blog_tags %}
+<div class="col-md-4">
+    <div class="mu-blog-sidebar">
+
+        <!-- start Single Widget -->
+        <div class="mu-sidebar-widget mu-sidebar-social-widget">
+            <h2 class="mu-sidebar-widget-title">党建文章统计</h2>
+            <div class="mu-popular-content-widget">
+                截至{% now "Y年m月d日 h:m" %}, 已发布了{% total_posts %}篇文章
+            </div>
+        </div>
+        <!-- End single widget -->
+
+        <!-- start Single Widget -->
+        <div class="mu-sidebar-widget">
+            <h2 class="mu-sidebar-widget-title">最新发表文章TOP5</h2>
+            <div class="mu-popular-content-widget">
+                {% show_latest_posts 5 %}
+            </div>
+        </div>
+        <!-- End single widget -->
+
+        <!-- start Single Widget -->
+        <div class="mu-sidebar-widget">
+            <h2 class="mu-sidebar-widget-title">最多评论文章TOP5</h2>
+            <div class="mu-popular-content-widget">
+                {% get_most_commented_posts as most_commented_posts %}
+                <ul>
+                    {% for post in most_commented_posts %}
+                        <li>
+                            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <!-- End single widget -->
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<!-- Start paginatin -->
+<nav aria-label="Page navigation example" class="mu-blog-pagination">
+    <ul class="pagination">
+        <li class="page-item">
+            {% if page.has_previous %}
+                <a class="page-link" href="?page={{ page.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true" class="fa fa-long-arrow-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            {% endif %}
+        </li>
+        {% for i in page.paginator.page_range %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endfor %}
+        <li class="page-item">
+            {% if page.has_next %}
+                <a class="page-link" href="?page={{ page.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true" class="fa fa-long-arrow-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            {% endif %}
+        </li>
+    </ul>
+    <span class="current">
+        Page {{ page.number }} of {{ page.paginator.num_pages }}.
+    </span>
+</nav>
+<!-- End pagination -->
